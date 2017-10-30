@@ -18,7 +18,7 @@ public class Time {
 	private String nome;
     @Column(unique = true, nullable = true)
 	private String sigla;
-
+    
 	public String getNome() {
 		return nome;
 	}

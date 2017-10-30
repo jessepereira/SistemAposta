@@ -16,5 +16,8 @@ public class Cupom {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataJogo; 
     
+    private double valorAposta;
+    
+    private double valorComissao;
     
 }

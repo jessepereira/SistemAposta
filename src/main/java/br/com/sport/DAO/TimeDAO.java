@@ -6,7 +6,6 @@ public class TimeDAO extends GenericDAO<Time>{
 
 	public TimeDAO() {
 		super(Time.class);
-		// TODO Auto-generated constructor stub
 	}
-     
+	     
 }
