@@ -10,14 +10,26 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Cupom {
-    @Id
+    
+	@Id
     @GeneratedValue
     private int id;
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar dataJogo; 
+    private Calendar dataJogo;
     
-    private double valorAposta;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Calendar getDataJogo() {
+		return dataJogo;
+	}
+	public void setDataJogo(Calendar dataJogo) {
+		this.dataJogo = dataJogo;
+	} 
     
-    private double valorComissao;
+    
     
 }
