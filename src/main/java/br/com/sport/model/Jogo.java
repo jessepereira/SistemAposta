@@ -2,15 +2,13 @@ package br.com.sport.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Jogo {
-	@GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar dataJogo; 
+    private Calendar dataJogo;
 }
