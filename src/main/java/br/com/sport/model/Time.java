@@ -14,9 +14,9 @@ public class Time {
     @Id
     @GeneratedValue
     private int id;
-    @Column(unique = true, nullable = true)
+    @Column(unique = true, nullable = false)
 	private String nome;
-    @Column(unique = true, nullable = true)
+    @Column(unique = false, nullable = false)
 	private String sigla;
     
 	public String getNome() {
