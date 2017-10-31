@@ -6,11 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:body>
-    <div class="nav">
-        <h:form id="menuForm">
-            <p:commandButton id="dynaButton" value="Menu" type="button" icon="ui-icon-extlink"/>
-            <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
-                <p:submenu label="Menu">
+    <div>
+        <h:form id="menuForm" style="background-color: #56c2e1">
+            <p:menu style="align-self: baseline; width: 100px; margin-left: auto; margin-right: auto;">
+                <p:submenu>
                     <p:menuitem value="Bilhete" action="criarBilhete"/>
                     <p:menuitem value="Jogo" action="criarJogo"/>
                     <p:menuitem value="Resultado" action="criarResultado"/>

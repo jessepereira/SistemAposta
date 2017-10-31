@@ -14,25 +14,32 @@
     </ui:insert>
 </h:head>
 <h:body>
-    <h:panelGroup id="page" layout="block">
-        <div id="menu">
-            <ui:insert name="menu">
-                <ui:include src="/templates/menu.xhtml"/>
-            </ui:insert>
-        </div>
-        <div id="header">
-            <ui:insert name="header">
+    <p:layout fullPage="true">
+        <p:layoutUnit position="west" header="menu" resizable="true" collapsible="true">
+            <div id="menu">
+                <ui:insert name="menu">
+                    <ui:include src="/templates/menu.xhtml"/>
+                </ui:insert>
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="north" resizable="true">
+            <div id="header">
+                <ui:insert name="header">
+                </ui:insert>
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <div id="content" class="container">
+                <ui:insert name="content"/>
+            </div>
+        </p:layoutUnit>
 
-            </ui:insert>
-        </div>
-        <div id="content" class="container">
-            <ui:insert name="content"/>
-        </div>
         <div id="footer">
             <ui:insert name="footer">
                 <ui:include src="/templates/footer.xhtml"/>
             </ui:insert>
         </div>
-    </h:panelGroup>
+
+    </p:layout>
 </h:body>
 </html>
