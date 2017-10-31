@@ -4,18 +4,24 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class Jogo {
-		
+	@Id
 	@GeneratedValue
     private int id;
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataJogo; 
-    private int timeCasa;
-    private int timeFora;
+    
+    @OneToOne
+    @JoinColumn(name="chave_do_time")
+    private Time time;
+   
     private String resultado;
     
     
@@ -31,17 +37,12 @@ public class Jogo {
 	public void setDataJogo(Calendar dataJogo) {
 		this.dataJogo = dataJogo;
 	}
-	public int getTimeCasa() {
-		return timeCasa;
+	
+	public Time getTime() {
+		return time;
 	}
-	public void setTimeCasa(int timeCasa) {
-		this.timeCasa = timeCasa;
-	}
-	public int getTimeFora() {
-		return timeFora;
-	}
-	public void setTimeFora(int timeFora) {
-		this.timeFora = timeFora;
+	public void setTime(Time time) {
+		this.time = time;
 	}
 	public String getResultado() {
 		return resultado;
