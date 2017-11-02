@@ -15,7 +15,7 @@
 </h:head>
 <h:body>
     <p:layout fullPage="true">
-        <p:layoutUnit position="west" header="menu" resizable="true" collapsible="true">
+        <p:layoutUnit position="west" resizable="true" collapsible="true" >
             <div id="menu">
                 <ui:insert name="menu">
                     <ui:include src="/templates/menu.xhtml"/>
@@ -28,7 +28,7 @@
                 </ui:insert>
             </div>
         </p:layoutUnit>
-        <p:layoutUnit position="center">
+        <p:layoutUnit position="center" >
             <div id="content" class="container">
                 <ui:insert name="content"/>
             </div>

@@ -1,23 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:body>
-    <div>
-        <h:form id="menuForm" style="background-color: #56c2e1">
-            <p:menu style="align-self: baseline; width: 100px; margin-left: auto; margin-right: auto;">
-                <p:submenu>
-                    <p:menuitem value="Bilhete" action="criarBilhete"/>
-                    <p:menuitem value="Jogo" action="criarJogo"/>
-                    <p:menuitem value="Resultado" action="criarResultado"/>
-                    <p:menuitem value="Time" action="criarTime"/>
-                </p:submenu>
-            </p:menu>
-        </h:form>
-    </div>
+	<div>
+		<h:form>
+			<p:menu>
+				<p:submenu label="Cupom">
+					<p:menuitem value="Conferir Cupom" url="http://localhost:8080/pedidos-minicurso/index.jsf"/>
+					
+				</p:submenu>
+				<p:submenu label="JOGOS" >
+					<p:menuitem value="Gerenciar Jogos" url="http://localhost:8080/pedidos-minicurso/GerenciarJogos.jsf"/>
+					<p:menuitem value="Resultado das Partidas" url="http://localhost:8080/pedidos-minicurso/Resultado.jsf"/>
+					<p:menuitem value="Criar Time" url="http://localhost:8080/pedidos-minicurso/criarTime.jsf"/>
+				</p:submenu>
+				<p:submenu label="Área do Usuário">
+				<p:menuitem value="Login" url="http://localhost:8080/pedidos-minicurso/login.jsf"/>
+			    </p:submenu>
+			</p:menu>
+		</h:form>
+	</div>
 </h:body>
 
 </html>
