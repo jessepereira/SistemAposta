@@ -2,29 +2,27 @@ package br.com.sport.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Jogo {
 	@Id
 	@GeneratedValue
     private int id;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar dataJogo; 
-    
-    @OneToOne
-    @JoinColumn(name="chave_do_time")
-    private Time time;
+
+	@Temporal(TemporalType.TIMESTAMP)
+    private Calendar dataJogo;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Time timeCasa;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Time timeVisitante;
    
     private String resultado;
-    
-    
+
 	public int getId() {
 		return id;
 	}
@@ -37,19 +35,52 @@ public class Jogo {
 	public void setDataJogo(Calendar dataJogo) {
 		this.dataJogo = dataJogo;
 	}
-	
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
-	}
-	public String getResultado() {
+
+    public Time getTimeCasa() {
+        return timeCasa;
+    }
+
+    public void setTimeCasa(Time timeCasa) {
+        this.timeCasa = timeCasa;
+    }
+
+    public Time getTimeVisitante() {
+        return timeVisitante;
+    }
+
+    public void setTimeVisitante(Time timeVisitante) {
+        this.timeVisitante = timeVisitante;
+    }
+
+    public String getResultado() {
 		return resultado;
 	}
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
-	} 
-    
-    
+	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Jogo)) return false;
+
+        Jogo jogo = (Jogo) o;
+
+        if (id != jogo.id) return false;
+        if (dataJogo != null ? !dataJogo.equals(jogo.dataJogo) : jogo.dataJogo != null) return false;
+        if (timeCasa != null ? !timeCasa.equals(jogo.timeCasa) : jogo.timeCasa != null) return false;
+        if (timeVisitante != null ? !timeVisitante.equals(jogo.timeVisitante) : jogo.timeVisitante != null)
+            return false;
+        return resultado != null ? resultado.equals(jogo.resultado) : jogo.resultado == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (dataJogo != null ? dataJogo.hashCode() : 0);
+        result = 31 * result + (timeCasa != null ? timeCasa.hashCode() : 0);
+        result = 31 * result + (timeVisitante != null ? timeVisitante.hashCode() : 0);
+        result = 31 * result + (resultado != null ? resultado.hashCode() : 0);
+        return result;
+    }
 }

@@ -13,8 +13,16 @@ public class Aposta {
     @Column
     private String apostador;
 
-    @OneToMany(targetEntity = Jogo.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Jogo> jogos;
+    @Column
+    @GeneratedValue
+    private int apostadorCode;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Cupom cupom;
+
+    @OneToMany(targetEntity = Escolha.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Escolha> escolhas;
 
     public int getId() {
         return id;
@@ -32,11 +40,27 @@ public class Aposta {
         this.apostador = apostador;
     }
 
-    public List<Jogo> getJogos() {
-        return jogos;
+    public int getApostadorCode() {
+        return apostadorCode;
     }
 
-    public void setJogos(List<Jogo> jogos) {
-        this.jogos = jogos;
+    public void setApostadorCode(int apostadorCode) {
+        this.apostadorCode = apostadorCode;
+    }
+
+    public Cupom getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
+    }
+
+    public List<Escolha> getEscolhas() {
+        return escolhas;
+    }
+
+    public void setEscolhas(List<Escolha> escolhas) {
+        this.escolhas = escolhas;
     }
 }

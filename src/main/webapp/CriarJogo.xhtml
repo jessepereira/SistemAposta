@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/template.xhtml">
+
+    <ui:define name="content">
+        <div align="center">
+            <p:messages id="messages" showDetail="true" closable="true"/>
+            <h:form>
+                <p:outputLabel for="nameJogo" value="NOME:"/>
+                <p:inputText id="nameJogo" value="#{jogoBean.nomeCupom}"/>
+                <p:panelGrid columns="4">
+                    <p:outputLabel for="jogo1" value="Jogo1:"/>
+                    <p:selectOneMenu id="jogo1" value="#{jogoBean.jogo1.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo1v" value="X"/>
+                    <p:selectOneMenu id="jogo1v" value="#{jogoBean.jogo1.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="jogo2" value="Jogo2:"/>
+                    <p:selectOneMenu id="jogo2" value="#{jogoBean.jogo2.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo2v" value="X "/>
+                    <p:selectOneMenu id="jogo2v" value="#{jogoBean.jogo2.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo3" value="Jogo3:"/>
+                    <p:selectOneMenu id="jogo3" value="#{jogoBean.jogo3.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo3v" value="X "/>
+                    <p:selectOneMenu id="jogo3v" value="#{jogoBean.jogo3.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo4" value="Jogo4:"/>
+                    <p:selectOneMenu id="jogo4" value="#{jogoBean.jogo4.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo4v" value="X "/>
+                    <p:selectOneMenu id="jogo4v" value="#{jogoBean.jogo4.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo5" value="Jogo5:"/>
+                    <p:selectOneMenu id="jogo5" value="#{jogoBean.jogo5.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo5v" value="X "/>
+                    <p:selectOneMenu id="jogo5v" value="#{jogoBean.jogo5.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo6" value="Jogo6:"/>
+                    <p:selectOneMenu id="jogo6" value="#{jogoBean.jogo6.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo6v" value="X "/>
+                    <p:selectOneMenu id="jogo6v" value="#{jogoBean.jogo6.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo7" value="Jogo7:"/>
+                    <p:selectOneMenu id="jogo7" value="#{jogoBean.jogo7.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo7v" value="X "/>
+                    <p:selectOneMenu id="jogo7v" value="#{jogoBean.jogo7.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo8" value="Jogo8:"/>
+                    <p:selectOneMenu id="jogo8" value="#{jogoBean.jogo8.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo8v" value="X "/>
+                    <p:selectOneMenu id="jogo8v" value="#{jogoBean.jogo8.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="jogo9" value="Jogo9:"/>
+                    <p:selectOneMenu id="jogo9" value="#{jogoBean.jogo9.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo9v" value="X"/>
+                    <p:selectOneMenu id="jogo9v" value="#{jogoBean.jogo9.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo10" value="Jogo10:"/>
+                    <p:selectOneMenu id="jogo10" value="#{jogoBean.jogo10.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo10v" value="X "/>
+                    <p:selectOneMenu id="jogo10v" value="#{jogoBean.jogo10.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo11" value="Jogo11:"/>
+                    <p:selectOneMenu id="jogo11" value="#{jogoBean.jogo11.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo11v" value="X "/>
+                    <p:selectOneMenu id="jogo11v" value="#{jogoBean.jogo11.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo12" value="Jogo12:"/>
+                    <p:selectOneMenu id="jogo12" value="#{jogoBean.jogo12.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo12v" value="X "/>
+                    <p:selectOneMenu id="jogo12v" value="#{jogoBean.jogo12.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo13" value="Jogo13:"/>
+                    <p:selectOneMenu id="jogo13" value="#{jogoBean.jogo13.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo13v" value="X "/>
+                    <p:selectOneMenu id="jogo13v" value="#{jogoBean.jogo13.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo14" value="Jogo14:"/>
+                    <p:selectOneMenu id="jogo14" value="#{jogoBean.jogo14.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo14v" value="X "/>
+                    <p:selectOneMenu id="jogo14v" value="#{jogoBean.jogo14.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo15" value="Jogo15:"/>
+                    <p:selectOneMenu id="jogo15" value="#{jogoBean.jogo15.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo15v" value="X "/>
+                    <p:selectOneMenu id="jogo15v" value="#{jogoBean.jogo15.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo16" value="Jogo16:"/>
+                    <p:selectOneMenu id="jogo16" value="#{jogoBean.jogo16.timeCasa}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="jogo16v" value="X "/>
+                    <p:selectOneMenu id="jogo16v" value="#{jogoBean.jogo16.timeVisitante}" converter="timeConverter">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{jogoBean.times}" var="time" itemLabel="#{time.nome} - #{time.sigla}"
+                                       itemValue="#{time}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid><br/>
+                <h:commandButton value="CRIAR JOGO" actionListener="#{jogoBean.criarJogo}"/>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

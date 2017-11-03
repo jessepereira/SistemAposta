@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.util.List;
 
 @ManagedBean
 @RequestScoped
@@ -31,7 +32,7 @@ public class TimeBean {
             time.setSigla(sigla);
             timeDAO.persist(time);
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("CCriarTime.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,5 +52,9 @@ public class TimeBean {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public List<Time> getTimes(){
+        return timeDAO.findAll();
     }
 }

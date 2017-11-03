@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
                 template="/templates/template.xhtml">
 
     <ui:define name="content">
@@ -18,6 +18,20 @@
                 </p:panelGrid>
                 <p:commandButton value="CRIAR" actionListener="#{timeBean.criarTime}"/>
             </h:form>
+        </div>
+        <div align="center">
+            <p:dataTable var="time" value="#{timeBean.times}" sortBy="#{time.nome}"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{time.nome}"/>
+                </p:column>
+
+                <p:column headerText="Sigla">
+                    <h:outputText value="#{time.sigla}"/>
+                </p:column>
+            </p:dataTable>
         </div>
     </ui:define>
 
