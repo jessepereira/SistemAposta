@@ -11,16 +11,16 @@
             <h:form>
                 <p:panel rendered="false">
                     <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
-                    <p:selectOneMenu id="selectEixo" value="#{apostaBean.cupom}" autoWidth="true"
+                    <p:selectOneMenu id="selectEixo" value="#{resultadoBean.cupom}" autoWidth="true"
                                      converter="cupomConverter">
                         <f:selectItem itemLabel="Selecione" itemValue=""/>
-                        <f:selectItems value="#{apostaBean.cupons}" var="cupom" itemLabel="#{cupom.nomeCupom}"
+                        <f:selectItems value="#{resultadoBean.cupons}" var="cupom" itemLabel="#{cupom.nomeCupom}"
                                        itemValue="#{cupom}"/>
                         <p:ajax event="itemSelect" update="cupomForm"/>
                     </p:selectOneMenu>
                 </p:panel>
                 <p:panel>
-                    <p:dataTable value="#{apostaBean.cupom.jogos}" var="jogo">
+                    <p:dataTable value="#{resultadoBean.cupom.jogos}" var="jogo">
                         <p:column headerText="" style="text-align: center">
                             <p:outputLabel value="#{jogo.timeCasa.nome}-#{jogo.timeCasa.sigla}"/>
                             <p:outputLabel value=" X "/>
@@ -28,14 +28,14 @@
                         </p:column>
 
                         <p:column headerText="" style="text-align: center">
-                            <p:selectOneButton value="#{apostaBean.resultado}" id="resultadoSelect">
-                                <f:selectItems value="#{apostaBean.item}"/>
-                                <p:ajax event="change" listener="#{apostaBean.onEscolhaSelect(jogo.id)}"/>
+                            <p:selectOneButton value="#{resultadoBean.resultado}" id="resultadoSelect">
+                                <f:selectItems value="#{resultadoBean.item}"/>
+                                <p:ajax event="change" listener="#{resultadoBean.onEscolhaSelect(jogo.id)}"/>
                             </p:selectOneButton>
                         </p:column>
                     </p:dataTable><br/>
                     <div align="center">
-                        <p:commandButton value="SALVAR RESULTADO" actionListener="#{apostaBean.salvarAposta}"/>
+                        <p:commandButton value="SALVAR RESULTADO" actionListener="#{resultadoBean.salvarAposta}"/>
                     </div>
                 </p:panel>
             </h:form>

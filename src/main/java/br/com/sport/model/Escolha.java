@@ -9,7 +9,11 @@ public class Escolha implements Serializable {
     private static final long serialVersionUID = 3462578845242L;
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "escolha_seq",
+            sequenceName = "escolha_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "escolha_seq")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

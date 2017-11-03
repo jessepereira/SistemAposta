@@ -10,7 +10,11 @@ import javax.persistence.*;
 public class Cupom {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "cupom_seq",
+            sequenceName = "cupom_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "cupom_seq")
     private Long id;
 
     @Column

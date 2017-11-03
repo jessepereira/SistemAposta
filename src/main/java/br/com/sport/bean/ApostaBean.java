@@ -38,7 +38,6 @@ public class ApostaBean implements Serializable {
 
     private List<Cupom> cupons;
 
-
     private List<Escolha> escolhas;
 
     private boolean option;
@@ -60,7 +59,6 @@ public class ApostaBean implements Serializable {
         item.put("CASA", "C");
         item.put("FORA", "F");
 
-
         cupomDAO = new CupomDAO();
         apostaDAO = new ApostaDAO();
         cupons = cupomDAO.getAllCuponsOnResultado();
@@ -68,8 +66,6 @@ public class ApostaBean implements Serializable {
             cupom = cupons.get(0);
 
         }
-
-
     }
 
     public void onEscolhaSelect(String jogoId) {

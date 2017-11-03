@@ -6,8 +6,12 @@ import javax.persistence.*;
 
 @Entity
 public class Jogo {
-	@Id
-	@GeneratedValue
+    @Id
+    @SequenceGenerator(name = "jogo_seq",
+            sequenceName = "jogo_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "jogo_seq")
     private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)

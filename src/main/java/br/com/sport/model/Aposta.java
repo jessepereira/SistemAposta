@@ -7,7 +7,11 @@ import java.util.List;
 public class Aposta {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "aposta_seq",
+            sequenceName = "aposta_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "aposta_seq")
     private int id;
 
     @Column

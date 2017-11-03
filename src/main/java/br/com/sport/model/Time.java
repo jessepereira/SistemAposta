@@ -1,18 +1,18 @@
 package br.com.sport.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 
 public class Time {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "time_seq",
+            sequenceName = "time_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "time_seq")
     private Long id;
     @Column(unique = true, nullable = false)
     private String nome;
