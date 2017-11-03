@@ -13,4 +13,8 @@ public class CupomDAO extends GenericDAO<Cupom> {
     public List<Cupom> getAllCuponsOnResultado() {
         return entityManager.createQuery("select c from Cupom c where resultado = false",Cupom.class).getResultList();
     }
+
+    public List<Cupom> getAllCuponsWithResultado(){
+        return entityManager.createQuery("select c from Cupom c where resultado = true",Cupom.class).getResultList();
+    }
 }

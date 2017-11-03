@@ -1,104 +1,46 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
 
-	<ui:define name="content">
-		<h:body>
-			
-					<h3>jogos</h3>
-					<p:panelGrid style="margin-top:20px" >
-						<f:facet name="header">
-							<p:row>
-								<p:column colspan="6">Campeonato série A</p:column>
-							</p:row>
+    <ui:define name="content">
+        <div align="center">
+            <p:outputPanel id="painelGeral">
+                <h:form>
+                    <p:panel>
+                        <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
+                        <p:selectOneMenu id="selectEixo" value="#{pontuacaoApostaBean.cupom}" autoWidth="true">
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+                            <f:selectItems value="#{pontuacaoApostaBean.cupons}" var="cupom"
+                                           itemLabel="#{cupom.nomeCupom}"
+                                           itemValue="#{cupom}"/>
+                            <p:ajax event="itemSelect" listener="#{pontuacaoApostaBean.onCupomSelect}"/>
+                        </p:selectOneMenu>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable value="#{pontuacaoApostaBean.apostas}" var="aposta">
+                            <p:column headerText="Nome" style="text-align:center">
+                                <h:outputText value="#{aposta.apostador}"/>
+                            </p:column>
+                            <p:column headerText="Acertos">
+                                <h:outputText value="#{pontuacaoApostaBean.getAcertos(aposta.id)}"/>
+                            </p:column>
+                            <p:column headerText="Pontuação" sortBy="#{pontuacaoApostaBean.pontuacao}">
+                                <h:outputText value="#{pontuacaoApostaBean.calcularResultado(aposta.id)}"/>
+                            </p:column>
 
-							<p:row >
-								<p:column colspan="2" >Times</p:column>
-								<p:column colspan="2">Vencedor</p:column>
-								<p:column colspan="2">Data da Partida</p:column>
-
-							</p:row>
-						</f:facet>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-
-
-					</p:panelGrid>
-
-				
-		</h:body>
-
-	</ui:define>
+                            <p:column headerText="Ações" style="text-align: center">
+                                <!--<p:commandButton oncomplete="PF('dateProvaDialog').show()" id="alterar"
+                                                 update="listProva:dateProva" title="Visualizar Bilhete">
+                                    <f:setPropertyActionListener value="#{aposta}" target="#{pontuacaoApostaBean.aposta}"/>
+                                </p:commandButton>-->
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </p:outputPanel>
+        </div>
+    </ui:define>
 </ui:composition>

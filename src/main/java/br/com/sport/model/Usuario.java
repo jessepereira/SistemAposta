@@ -6,11 +6,11 @@ import javax.persistence.*;
 public class Usuario {
 
     @Id
-    @SequenceGenerator(name = "time_seq",
-            sequenceName = "time_seq",
+    @SequenceGenerator(name = "usuario_seq",
+            sequenceName = "usuario_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "time_seq")
+            generator = "usuario_seq")
     private int id;
 
     @Column

@@ -32,7 +32,7 @@ public class TimeBean {
             time.setSigla(sigla);
             timeDAO.persist(time);
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("CCriarTime.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("CriarTime.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
