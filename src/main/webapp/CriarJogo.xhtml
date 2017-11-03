@@ -10,7 +10,7 @@
             <p:messages id="messages" showDetail="true" closable="true"/>
             <h:form>
                 <p:outputLabel for="nameJogo" value="NOME:"/>
-                <p:inputText id="nameJogo" value="#{jogoBean.nomeCupom}"/>
+                <p:inputText id="nameJogo" value="#{jogoBean.nomeCupom}" required="true"/>
                 <p:panelGrid columns="4">
                     <p:outputLabel for="jogo1" value="Jogo1:"/>
                     <p:selectOneMenu id="jogo1" value="#{jogoBean.jogo1.timeCasa}" converter="timeConverter">

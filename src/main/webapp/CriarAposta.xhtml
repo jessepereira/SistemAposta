@@ -21,7 +21,7 @@
                 </p:panel>
                 <p:panel>
                     <p:outputLabel for="apostador" value="Apostador"/>
-                    <p:inputText id="apostador" value="#{apostaBean.aposta.apostador}"/>
+                    <p:inputText id="apostador" value="#{apostaBean.aposta.apostador}" required="true"/>
                     <p:dataTable value="#{apostaBean.cupom.jogos}" var="jogo">
                         <p:column headerText="" style="text-align: center">
                             <p:outputLabel value="#{jogo.timeCasa.nome}-#{jogo.timeCasa.sigla}"/>

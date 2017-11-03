@@ -4,20 +4,36 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
- <persistence-unit name="sport" transaction-type="RESOURCE_LOCAL">
-  <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-  <class>br.com.sport.model.Time</class>
-  <properties>
-   <property name="javax.persistence.jdbc.driver"   value="com.mysql.jdbc.Driver"               />
-   <property name="javax.persistence.jdbc.url"      value="jdbc:mysql://localhost:3306/sport"    />
-   <property name="javax.persistence.jdbc.user"     value="root"                                  />
-   <property name="javax.persistence.jdbc.password" value="jp3312210"                                    />
+    <!--<persistence-unit name="sport" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sport"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
 
-   <property name="hibernate.hbm2ddl.auto"          value="update"                              />
-   <property name="hibernate.show_sql"              value="true"                                />
-   <property name="hibernate.format_sql"            value="true"                               />
-   <property name="hibernate.dialect"               value="org.hibernate.dialect.MySQLDialect"   />
-  </properties>
- </persistence-unit>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+        </properties>
+    </persistence-unit>-->
+
+    <persistence-unit name="sport" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://ec2-54-243-107-66.compute-1.amazonaws.com:5432/d9mbcnihqd325j?sslmode=require"/>
+            <property name="javax.persistence.jdbc.user" value="vdtqjpxnutuotr"/>
+            <property name="javax.persistence.jdbc.password"
+                      value="956845627d26d33a8ac4814e3f2696c907bb9496e3bd1d584c8b21ed67096707"/>
+
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+        </properties>
+    </persistence-unit>
 
 </persistence>

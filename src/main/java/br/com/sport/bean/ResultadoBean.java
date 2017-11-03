@@ -41,7 +41,7 @@ public class ResultadoBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        cupom = new Cupom();
+
         escolha = new Escolha();
         result = new Resultado();
         escolhas = new ArrayList<>();
@@ -52,11 +52,13 @@ public class ResultadoBean implements Serializable {
         item.put("CASA", "C");
         item.put("FORA", "F");
 
-        cupons = cupomDAO.getAllCuponsOnResultado();
-        if (cupons.size() == 1) {
-            cupom = cupons.get(0);
-            optionSelect = false;
+        if(cupom == null){
+            cupom = new Cupom();
+            cupons = cupomDAO.getAllCuponsOnResultado();
+            cupom = cupons.get(cupons.size() - 1);
         }
+
+
     }
 
     public void salvarAposta() {
@@ -90,7 +92,6 @@ public class ResultadoBean implements Serializable {
                         escolha.setResposta(resultado);
                         escolha.setJogo(new JogoDAO().findById(Integer.parseInt(jogoId)));
                         escolhas.add(escolha);
-
                         return;
                     }
                 }
