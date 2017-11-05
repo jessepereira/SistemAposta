@@ -32,6 +32,7 @@ public class ResultadoBean implements Serializable {
     private ResultadoDAO resultadoDAO;
 
     private boolean optionSelect = true;
+    private int cupomID;
 
     private List<Cupom> cupons;
     private List<Escolha> escolhas;
@@ -52,10 +53,12 @@ public class ResultadoBean implements Serializable {
         item.put("CASA", "C");
         item.put("FORA", "F");
 
-        if(cupom == null){
+        if (cupom == null) {
             cupom = new Cupom();
             cupons = cupomDAO.getAllCuponsOnResultado();
-            cupom = cupons.get(cupons.size() - 1);
+            if (cupons.size() > 0) {
+                cupom = cupons.get(cupons.size() - 1);
+            }
         }
 
 

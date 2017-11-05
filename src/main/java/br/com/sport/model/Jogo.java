@@ -17,11 +17,11 @@ public class Jogo {
 	@Temporal(TemporalType.TIMESTAMP)
     private Calendar dataJogo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn
     private Time timeCasa;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn
     private Time timeVisitante;
    

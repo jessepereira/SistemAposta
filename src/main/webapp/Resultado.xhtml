@@ -4,14 +4,14 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
-
     <ui:define name="content">
         <div align="center">
             <p:outputPanel id="painelGeral">
                 <h:form>
                     <p:panel>
                         <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
-                        <p:selectOneMenu id="selectEixo" value="#{pontuacaoApostaBean.cupom}" autoWidth="true">
+                        <p:selectOneMenu id="selectEixo" value="#{pontuacaoApostaBean.cupom}" autoWidth="true"
+                                         converter="cupomConverter">
                             <f:selectItem itemLabel="Selecione" itemValue=""/>
                             <f:selectItems value="#{pontuacaoApostaBean.cupons}" var="cupom"
                                            itemLabel="#{cupom.nomeCupom}"

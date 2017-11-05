@@ -45,8 +45,10 @@ public class PontuacaoApostaBean {
         if (cupom == null) {
             cupom = new Cupom();
             cupons = cupomDAO.getAllCuponsWithResultado();
-            cupom = cupons.get(cupons.size() - 1);
-            apostas = apostaDAO.apostasByCupom(cupom.getId());
+            if (cupons.size() > 0) {
+                cupom = cupons.get(cupons.size() - 1);
+                apostas = apostaDAO.apostasByCupom(cupom.getId());
+            }
         } else {
             apostas = apostaDAO.apostasByCupom(cupom.getId());
         }

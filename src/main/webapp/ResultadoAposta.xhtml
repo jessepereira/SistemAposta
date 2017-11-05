@@ -4,7 +4,6 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/template.xhtml">
-
     <ui:define name="content">
         <div align="center">
             <p:messages id="messages" showDetail="true" closable="true"/>
@@ -26,7 +25,6 @@
                             <p:outputLabel value=" X "/>
                             <p:outputLabel value="#{jogo.timeVisitante.nome}-#{jogo.timeVisitante.sigla}"/>
                         </p:column>
-
                         <p:column headerText="" style="text-align: center">
                             <p:selectOneButton value="#{resultadoBean.resultado}" id="resultadoSelect">
                                 <f:selectItems value="#{resultadoBean.item}"/>
