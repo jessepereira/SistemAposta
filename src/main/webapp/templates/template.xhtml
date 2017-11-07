@@ -1,44 +1,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>FutBet</title>
-    <ui:insert name="metatag">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    </ui:insert>
+	<title>FutBet</title>
+	<ui:insert name="metatag">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</ui:insert>
+
+	<style>
+.ui-layout-west {
+	background-color: #000000 !important;
+	border: none;
+}
+
+.ui-layout-west .ui-layout-unit-content {
+	background-color: #000000 !important;
+}
+
+.ui-layout-center {
+	background-color: #000080 !important;
+	border: none;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+	background-color: #DCDCDC !important;
+}
+
+.ui-layout-north {
+	background-color: #000080 !important;
+	border: none;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	background-color: #000080 !important;
+}
+
+body {
+	background-color: #000080;
+}
+</style>
+
 </h:head>
 <h:body>
-    <p:layout fullPage="true">
-        <p:layoutUnit position="west" resizable="true" collapsible="true" >
-            <div id="menu">
-                <ui:insert name="menu">
-                    <ui:include src="/templates/menu.xhtml"/>
-                </ui:insert>
-            </div>
-        </p:layoutUnit>
-        <p:layoutUnit position="north" resizable="true">
-            <div id="header">
-                <ui:insert name="header">
-                </ui:insert>
-            </div>
-        </p:layoutUnit>
-        <p:layoutUnit position="center" >
-            <div id="content" class="container">
-                <ui:insert name="content"/>
-            </div>
-        </p:layoutUnit>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="west" size="200" header="Minimizar Menu"
+			resizable="true" collapsible="true" maxSize="259" minSize="259">
 
-        <div id="footer">
-            <ui:insert name="footer">
-                <ui:include src="/templates/footer.xhtml"/>
-            </ui:insert>
-        </div>
+			<h:graphicImage library="img" name="futebol.png" width="233"
+				height="250" />
 
-    </p:layout>
+			<div id="menu">
+				<ui:insert name="menu">
+					<ui:include src="/templates/menu.xhtml" />
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		
+		<p:layoutUnit position="center">
+
+			<p:layout>
+				<p:layoutUnit position="north" resizable="true" size="7%"
+					header="BOLÃO HD DO FUTEBOL" maxSize="40" minSize="40">
+
+
+				</p:layoutUnit>
+
+				<p:layoutUnit position="center">
+					<div id="content" class="container">
+						<ui:insert name="content" />
+					</div>
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+
+	</p:layout>
 </h:body>
 </html>
