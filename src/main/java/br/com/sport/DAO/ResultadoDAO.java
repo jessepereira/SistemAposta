@@ -1,8 +1,6 @@
 package br.com.sport.DAO;
 
-import br.com.sport.model.Cupom;
 import br.com.sport.model.Resultado;
-import com.sun.org.apache.regexp.internal.RE;
 
 public class ResultadoDAO extends GenericDAO<Resultado> {
     public ResultadoDAO() {

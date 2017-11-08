@@ -21,6 +21,16 @@
                                              icon="ui-icon-search" title="View">
                                 <f:setPropertyActionListener value="#{aposta}" target="#{gerenciarApostaBean.aposta}"/>
                             </p:commandButton>
+                            <p:commandButton id="alterar" actionListener="#{gerenciarApostaBean.editAposta(aposta)}"
+                                             icon="ui-icon-pencil" title="Alterar Aposta">
+                            </p:commandButton>
+                            <p:commandButton actionListener="#{gerenciarApostaBean.cancelarAposta}" id="cancelar"
+                                             icon="ui-icon-closethick"
+                                             title="Cancelar Prova">
+                                <f:setPropertyActionListener value="#{aposta}" target="#{gerenciarApostaBean.aposta}"/>
+                                <p:confirm header="Confirmação" message="Deseja Cancelar o Cupom?"
+                                           icon="ui-icon-alert"/>
+                            </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </p:panel>
@@ -44,6 +54,10 @@
                         </p:panel>
                     </p:outputPanel>
                 </p:dialog>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="SIM" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="NÃO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
             </h:form>
         </div>
     </ui:define>

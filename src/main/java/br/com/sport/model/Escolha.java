@@ -16,8 +16,8 @@ public class Escolha implements Serializable {
             generator = "escolha_seq")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name="jogo_id", referencedColumnName="id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "jogo_id", referencedColumnName = "id")
     private Jogo jogo;
 
     private String resposta;

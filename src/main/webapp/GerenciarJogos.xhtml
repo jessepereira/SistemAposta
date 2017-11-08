@@ -1,113 +1,62 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" 
-	template="/templates/template.xhtml">
-	
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Gerencia jogos</title>
-</h:head>
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
 
     <ui:define name="content">
-		<h:body>
-				<h3>jogos</h3>
-					<p:panelGrid style="margin-top:20px" >
-						<f:facet name="header">
-							<p:row>
-								<p:column colspan="6">Campeonato série A</p:column>
-							</p:row>
-
-							<p:row >
-								<p:column colspan="2" >Times</p:column>
-								<p:column colspan="2">Vencedor</p:column>
-								<p:column colspan="2">Data da Partida</p:column>
-
-							</p:row>
-						</f:facet>
-						<p:row>
-							<p:column>
-							  
-							</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-						<p:row>
-							<p:column>flamengo</p:column>
-							<p:column>5</p:column>
-							<p:column colspan="2" rowspan="2" style="font-weight: bold;">vencedor</p:column>
-							<p:column rowspan="2">10</p:column>
-						</p:row>
-						<p:row>
-							<p:column>Houston</p:column>
-							<p:column>0</p:column>
-						</p:row>
-
-
-					</p:panelGrid>
-
-				
-		</h:body>
-
-	</ui:define>
+        <div align="center">
+            <h:form id="form">
+                <p:panel>
+                    <p:dataTable value="#{gerenciarCupomBean.cupons}" var="cupom" style="text-align: center">
+                        <f:facet name="header">
+                            Bilhetes
+                        </f:facet>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{cupom.nomeCupom}"/>
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update=":form:apostaDetail" oncomplete="PF('carDialog').show()"
+                                             icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{cupom}" target="#{gerenciarCupomBean.cupom}"/>
+                            </p:commandButton>
+                            <p:commandButton id="alterar" actionListener="#{gerenciarCupomBean.editCupom(cupom)}"
+                                             icon="ui-icon-pencil" title="Alterar Aposta">
+                            </p:commandButton>
+                            <p:commandButton actionListener="#{gerenciarCupomBean.cancelarCupom}" id="cancelar"
+                                             icon="ui-icon-closethick"
+                                             title="Cancelar Prova">
+                                <f:setPropertyActionListener value="#{cupom}" target="#{gerenciarCupomBean.cupom}"/>
+                                <p:confirm header="Confirmação" message="Deseja Cancelar o Cupom?"
+                                           icon="ui-icon-alert"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                <p:dialog header="Informação da Aposta" widgetVar="carDialog" showEffect="fade"
+                          resizable="true">
+                    <p:outputPanel id="apostaDetail" style="text-align:center;">
+                        <p:panel>
+                            <p:dataTable value="#{gerenciarCupomBean.cupom.jogos}" var="jogo">
+                                <p:column headerText="" style="text-align: center">
+                                    <p:outputLabel
+                                            value="#{jogo.timeCasa.nome}-#{jogo.timeCasa.sigla}"/>
+                                    <p:outputLabel value=" X "/>
+                                    <p:outputLabel
+                                            value="#{jogo.timeVisitante.nome}-#{jogo.timeVisitante.sigla}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </p:outputPanel>
+                </p:dialog>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="SIM" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="NÃO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+    </ui:define>
 
 </ui:composition>

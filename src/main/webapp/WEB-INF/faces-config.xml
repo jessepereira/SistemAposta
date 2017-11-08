@@ -16,11 +16,11 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    <!--  <lifecycle>
-          <phase-listener>
-              br.com.sport.util.AuthorizationListener
-          </phase-listener>
-      </lifecycle>-->
+    <lifecycle>
+        <phase-listener>
+            br.com.sport.util.AuthorizationListener
+        </phase-listener>
+    </lifecycle>
 
 
 </faces-config>

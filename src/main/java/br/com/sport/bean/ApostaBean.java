@@ -16,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ApostaBean implements Serializable {
 
     private List<Escolha> escolhas;
 
-    private boolean option;
+    private boolean option = true;
     private String resultado;
     private int contador;
     private Map<String, String> item;
@@ -50,22 +51,26 @@ public class ApostaBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        cupom = new Cupom();
-        escolha = new Escolha();
-        aposta = new Aposta();
-        escolhas = new ArrayList<>();
-        option = true;
+        cupomDAO = new CupomDAO();
+        apostaDAO = new ApostaDAO();
+
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        aposta = (Aposta) session.getAttribute("currentAposta");
+        if (aposta == null) {
+            aposta = new Aposta();
+            escolha = new Escolha();
+            escolhas = new ArrayList<>();
+            cupons = cupomDAO.getAllCuponsOnResultado();
+            if (cupons.size() == 1 && cupom == null) {
+                cupom = cupons.get(0);
+            }
+        } else {
+            cupom = aposta.getCupom();
+            option = false;
+        }
         item = new LinkedHashMap<String, String>();
         item.put("CASA", "C");
         item.put("FORA", "F");
-
-        cupomDAO = new CupomDAO();
-        apostaDAO = new ApostaDAO();
-        cupons = cupomDAO.getAllCuponsOnResultado();
-        if (cupons.size() == 1) {
-            cupom = cupons.get(0);
-
-        }
     }
 
     public void onEscolhaSelect(String jogoId) {
@@ -106,6 +111,18 @@ public class ApostaBean implements Serializable {
             }
         }
     }
+
+    public void onCupomSelect() {
+        if (cupom != null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("CriarAposta.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     public void salvarAposta() {
         try {

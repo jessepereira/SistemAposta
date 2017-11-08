@@ -31,7 +31,7 @@ public class AuthorizationListener implements PhaseListener {
 
         if (!isLoginPage && user == null) {
             NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-            nh.handleNavigation(facesContext, null, "LoginPage");
+            nh.handleNavigation(facesContext, null, "/login.xhtml");
         }
     }
 

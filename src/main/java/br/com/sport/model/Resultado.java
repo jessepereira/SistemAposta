@@ -14,7 +14,7 @@ public class Resultado {
             generator = "resultado_seq")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private Cupom cupom;
 

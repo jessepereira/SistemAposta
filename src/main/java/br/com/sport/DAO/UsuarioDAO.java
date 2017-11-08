@@ -12,6 +12,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
     public Usuario getUsuarioByUsuarioAndSenha(String usuario, String senha) {
         return entityManager.createQuery("select u from Usuario u where u.usuario = :usuario and u.senha = :senha", Usuario.class)
                 .setParameter("usuario", usuario)
-                .setParameter("senha", senha).getSingleResult();
+                .setParameter("senha", senha).getResultList().get(0);
     }
 }
