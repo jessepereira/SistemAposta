@@ -51,8 +51,8 @@ public class ResultadoBean implements Serializable {
         resultadoDAO = new ResultadoDAO();
         item = new LinkedHashMap<String, String>();
         item.put("CASA", "C");
+        item.put("EMPATE","E");
         item.put("FORA", "F");
-
         if (cupom == null) {
             cupom = new Cupom();
             cupons = cupomDAO.getAllCuponsOnResultado();
@@ -60,19 +60,18 @@ public class ResultadoBean implements Serializable {
                 cupom = cupons.get(cupons.size() - 1);
             }
         }
-
-
     }
 
     public void salvarAposta() {
         try {
             cupom.setResultado(true);
+            cupomDAO.merge(cupom);
             result.setCupom(cupom);
             result.setEscolhas(escolhas);
 
             resultadoDAO.persist(result);
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Resultado.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }

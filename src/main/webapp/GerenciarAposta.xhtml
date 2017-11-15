@@ -9,33 +9,46 @@
         <div align="center">
             <h:form id="form">
                 <p:panel>
-                    <p:dataTable value="#{gerenciarApostaBean.apostaList}" var="aposta" style="text-align: center">
-                        <f:facet name="header">
-                            Bilhetes
-                        </f:facet>
-                        <p:column headerText="Nome">
-                            <p:outputLabel value="#{aposta.apostador}"/>
-                        </p:column>
-                        <p:column style="width:32px;text-align: center">
-                            <p:commandButton update=":form:apostaDetail" oncomplete="PF('carDialog').show()"
-                                             icon="ui-icon-search" title="View">
-                                <f:setPropertyActionListener value="#{aposta}" target="#{gerenciarApostaBean.aposta}"/>
-                            </p:commandButton>
-                            <p:commandButton id="alterar" actionListener="#{gerenciarApostaBean.editAposta(aposta)}"
-                                             icon="ui-icon-pencil" title="Alterar Aposta">
-                            </p:commandButton>
-                            <p:commandButton actionListener="#{gerenciarApostaBean.cancelarAposta}" id="cancelar"
-                                             icon="ui-icon-closethick"
-                                             title="Cancelar Prova">
-                                <f:setPropertyActionListener value="#{aposta}" target="#{gerenciarApostaBean.aposta}"/>
-                                <p:confirm header="Confirmação" message="Deseja Cancelar o Cupom?"
-                                           icon="ui-icon-alert"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
+                    <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
+                    <p:selectOneMenu id="selectEixo" value="#{gerenciarApostaBean.cupomId}" autoWidth="true">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{gerenciarApostaBean.cupons}" var="cupom"
+                                       itemLabel="#{cupom.nomeCupom}"
+                                       itemValue="#{cupom.id}"/>
+                        <p:ajax event="itemSelect" listener="#{gerenciarApostaBean.onApostaSelect}"
+                                update="bilhetesList"/>
+                    </p:selectOneMenu>
                 </p:panel>
-                <p:dialog header="Informação da Aposta" widgetVar="carDialog" showEffect="fade"
-                          resizable="true">
+                <p:fragment id="bilhetesList">
+                    <p:panel>
+                        <p:dataTable value="#{gerenciarApostaBean.apostaList}" var="aposta" style="text-align: center">
+                            <f:facet name="header">
+                                Bilhetes
+                            </f:facet>
+                            <p:column headerText="Nome">
+                                <p:outputLabel value="#{aposta.apostador}"/>
+                            </p:column>
+                            <p:column style="width:32px;text-align: center">
+                                <p:commandButton update=":form:apostaDetail" oncomplete="PF('carDialog').show()"
+                                                 icon="ui-icon-search" title="View">
+                                    <f:setPropertyActionListener value="#{aposta}"
+                                                                 target="#{gerenciarApostaBean.aposta}"/>
+                                </p:commandButton>
+                                <p:commandButton id="alterar" actionListener="#{gerenciarApostaBean.editAposta(aposta)}"
+                                                 icon="ui-icon-pencil" title="Alterar Aposta">
+                                </p:commandButton>
+                                <p:commandButton actionListener="#{gerenciarApostaBean.cancelarAposta(aposta)}"
+                                                 id="cancelar"
+                                                 icon="ui-icon-closethick"
+                                                 title="Cancelar Prova">
+                                    <p:confirm header="Confirmação" message="Deseja Cancelar a Prova?"
+                                               icon="ui-icon-alert"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </p:fragment>
+                <p:dialog header="Informação da Aposta" widgetVar="carDialog" showEffect="fade" resizable="false">
                     <p:outputPanel id="apostaDetail" style="text-align:center;">
                         <p:panel>
                             <p:dataTable value="#{gerenciarApostaBean.aposta.escolhas}" var="escolha">
@@ -61,5 +74,4 @@
             </h:form>
         </div>
     </ui:define>
-
 </ui:composition>

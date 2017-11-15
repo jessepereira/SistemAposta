@@ -14,4 +14,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
                 .setParameter("usuario", usuario)
                 .setParameter("senha", senha).getResultList().get(0);
     }
+
+
 }

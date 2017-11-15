@@ -4,42 +4,34 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/template.xhtml">
-
     <ui:define name="content">
         <div align="center">
             <p:messages id="messages" showDetail="true" closable="true"/>
             <h:form>
-                <p:panel rendered="#{apostaBean.option}">
-                    <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
-                    <p:selectOneMenu id="selectEixo" value="#{apostaBean.cupom}" autoWidth="true"
-                                     converter="cupomConverter">
-                        <f:selectItem itemLabel="Selecione" itemValue=""/>
-                        <f:selectItems value="#{apostaBean.cupons}" var="cupom" itemLabel="#{cupom.nomeCupom}"
-                                       itemValue="#{cupom}"/>
-                        <p:ajax event="itemSelect" listener="#{apostaBean.onCupomSelect}"/>
-                    </p:selectOneMenu>
-                </p:panel>
-                <p:panel>
-                    <p:outputLabel for="apostador" value="Apostador"/>
-                    <p:inputText id="apostador" value="#{apostaBean.aposta.apostador}" required="true"/>
-                    <p:dataTable value="#{apostaBean.cupom.jogos}" var="jogo">
-                        <p:column headerText="" style="text-align: center">
-                            <p:outputLabel value="#{jogo.timeCasa.nome}-#{jogo.timeCasa.sigla}"/>
-                            <p:outputLabel value=" X "/>
-                            <p:outputLabel value="#{jogo.timeVisitante.nome}-#{jogo.timeVisitante.sigla}"/>
-                        </p:column>
-
-                        <p:column headerText="" style="text-align: center">
-                            <p:selectOneButton value="#{apostaBean.resultado}" id="resultadoSelect">
-                                <f:selectItems value="#{apostaBean.item}"/>
-                                <p:ajax event="change" listener="#{apostaBean.onEscolhaSelect(jogo.id)}"/>
-                            </p:selectOneButton>
-                        </p:column>
-                    </p:dataTable><br/>
-                    <div align="center">
-                        <p:commandButton value="SALVAR RESULTADO" actionListener="#{apostaBean.salvarAposta}"/>
-                    </div>
-                </p:panel>
+                <p:fragment id="jogosAposta">
+                    <p:panel>
+                        <p:panel>
+                            <p:outputLabel for="apostador" value="Apostador"/>
+                            <p:inputText id="apostador" value="#{apostaBean.aposta.apostador}" required="true"/>
+                        </p:panel>
+                        <p:dataTable value="#{apostaBean.cupom.jogos}" var="jogo">
+                            <p:column headerText="" style="text-align: center">
+                                <p:outputLabel value="#{jogo.timeCasa.nome}-#{jogo.timeCasa.sigla}"/>
+                                <p:outputLabel value=" X "/>
+                                <p:outputLabel value="#{jogo.timeVisitante.nome}-#{jogo.timeVisitante.sigla}"/>
+                            </p:column>
+                            <p:column headerText="" style="text-align: center">
+                                <p:selectOneButton value="#{apostaBean.resultado}" id="resultadoSelect">
+                                    <f:selectItems value="#{apostaBean.item}"/>
+                                    <f:ajax event="change" listener="#{apostaBean.onEscolhaSelect(jogo.id)}"/>
+                                </p:selectOneButton>
+                            </p:column>
+                        </p:dataTable><br/>
+                        <div align="center">
+                            <p:commandButton value="SALVAR APOSTA" actionListener="#{apostaBean.salvarAposta}"/>
+                        </div>
+                    </p:panel>
+                </p:fragment>
             </h:form>
         </div>
     </ui:define>

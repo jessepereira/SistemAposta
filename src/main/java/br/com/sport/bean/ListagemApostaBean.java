@@ -17,14 +17,12 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class GerenciarApostaBean implements Serializable {
+public class ListagemApostaBean implements Serializable{
 
-    private static final long serialVersionUID = -34756381471098L;
+    private static final long serialVersionUID = -7378752361471098L;
 
     private Cupom cupom;
     private Aposta aposta;
-
-    private int cupomId;
 
     private List<Aposta> apostaList;
     private List<Cupom> cupons;
@@ -52,8 +50,13 @@ public class GerenciarApostaBean implements Serializable {
     }
 
     public void onApostaSelect() {
-        if (cupomId != 0) {
-            apostaList = apostaDAO.apostasByCupom(cupomId);
+        if (cupom != null) {
+            try {
+                apostaList = apostaDAO.apostasByCupom(cupom.getId());
+                FacesContext.getCurrentInstance().getExternalContext().redirect("GerenciarAposta.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -66,7 +69,7 @@ public class GerenciarApostaBean implements Serializable {
         }
     }
 
-    public void cancelarAposta(Aposta aposta) {
+    public void cancelarAposta() {
         try {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("OK", "Aposta Cancelada Com Sucesso"));
             apostaDAO.remove(aposta);
@@ -107,15 +110,4 @@ public class GerenciarApostaBean implements Serializable {
     public void setCupons(List<Cupom> cupons) {
         this.cupons = cupons;
     }
-
-    public int getCupomId() {
-        return cupomId;
-    }
-
-    public void setCupomId(int cupomId) {
-        this.cupomId = cupomId;
-    }
 }
-
-
-

@@ -6,6 +6,7 @@ import br.com.sport.DAO.EscolhaDAO;
 import br.com.sport.DAO.ResultadoDAO;
 import br.com.sport.model.Aposta;
 import br.com.sport.model.Cupom;
+import br.com.sport.model.DataModel.PontuacaoAposta;
 import br.com.sport.model.Escolha;
 import br.com.sport.model.Resultado;
 
@@ -14,11 +15,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class PontuacaoApostaBean {
+public class PontuacaoApostaBean implements Serializable {
+
+    private static final long serialVersionUID = -987535622342362L;
 
     private Cupom cupom;
     private Resultado resultado;
@@ -26,13 +31,17 @@ public class PontuacaoApostaBean {
 
     private List<Aposta> apostas;
     private List<Cupom> cupons;
+    private List<PontuacaoAposta> pontuacaoApostas;
+
 
     private ApostaDAO apostaDAO;
     private CupomDAO cupomDAO;
     private ResultadoDAO resultadoDAO;
     private EscolhaDAO escolhaDAO;
 
+    private int cupomId;
     private int pontuacao;
+    private int acerto;
 
     @PostConstruct
     public void init() {
@@ -52,20 +61,18 @@ public class PontuacaoApostaBean {
         } else {
             apostas = apostaDAO.apostasByCupom(cupom.getId());
         }
+        criarListagemPontuacao();
     }
 
     public void onCupomSelect() {
         if (cupom != null) {
-            try {
-                apostas = apostaDAO.apostasByCupom(cupom.getId());
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Resultado.xhtml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            apostas = apostaDAO.apostasByCupom(cupomId);
+            criarListagemPontuacao();
         }
     }
 
-    public int calcularResultado(int apostaID) {
+    private int calcularResultado(int apostaID) {
+        pontuacao = 0;
         resultado = resultadoDAO.getResultadoByCupom(cupom.getId());
         List<Escolha> escolhas = escolhaDAO.getEscolhasByAposta(apostaID);
         for (Escolha escolha : escolhas) {
@@ -84,10 +91,10 @@ public class PontuacaoApostaBean {
         return pontuacao;
     }
 
-    public int getAcertos(int apostaID) {
+    private int calcularAcerto(int apostaID) {
+        acerto = 0;
         resultado = resultadoDAO.getResultadoByCupom(cupom.getId());
         List<Escolha> escolhas = escolhaDAO.getEscolhasByAposta(apostaID);
-        int acerto = 0;
         for (Escolha escolha : escolhas) {
             for (int i = 0; i < resultado.getEscolhas().size(); i++) {
                 if (escolha.getJogo().getId() == resultado.getEscolhas().get(i).getJogo().getId()) {
@@ -99,6 +106,18 @@ public class PontuacaoApostaBean {
         }
         resultado = null;
         return acerto;
+    }
+
+
+    private void criarListagemPontuacao() {
+        pontuacaoApostas = new ArrayList<>();
+        for (Aposta aposta : apostas) {
+            PontuacaoAposta pontuacaoAposta = new PontuacaoAposta();
+            pontuacaoAposta.setAcertos(calcularAcerto(aposta.getId()));
+            pontuacaoAposta.setPontuacao(calcularResultado(aposta.getId()));
+            pontuacaoAposta.setNomeApostador(aposta.getApostador());
+            pontuacaoApostas.add(pontuacaoAposta);
+        }
     }
 
     public Cupom getCupom() {
@@ -139,5 +158,21 @@ public class PontuacaoApostaBean {
 
     public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
+    }
+
+    public int getCupomId() {
+        return cupomId;
+    }
+
+    public void setCupomId(int cupomId) {
+        this.cupomId = cupomId;
+    }
+
+    public List<PontuacaoAposta> getPontuacaoApostas() {
+        return pontuacaoApostas;
+    }
+
+    public void setPontuacaoApostas(List<PontuacaoAposta> pontuacaoApostas) {
+        this.pontuacaoApostas = pontuacaoApostas;
     }
 }

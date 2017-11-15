@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -51,7 +52,11 @@ public class JogoBean implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        cupom = (Cupom) session.getAttribute("currentCupom");
+        if (cupom != null) {
+            nomeCupom = cupom.getNomeCupom();
+        }
         jogo1 = new Jogo();
         jogo2 = new Jogo();
         jogo3 = new Jogo();
@@ -71,12 +76,14 @@ public class JogoBean implements Serializable {
         cupomDAO = new CupomDAO();
         timeDAO = new TimeDAO();
         jogoDAO = new JogoDAO();
-        times = timeDAO.findAll();
+        times = timeDAO.getAllTime();
     }
 
     public void criarJogo() {
         try {
-            cupom = new Cupom();
+            if (cupom == null) {
+                cupom = new Cupom();
+            }
             cupom.setNomeCupom(nomeCupom);
             cupom.getJogos().add(jogo1);
             cupom.getJogos().add(jogo2);
@@ -96,7 +103,7 @@ public class JogoBean implements Serializable {
             cupom.getJogos().add(jogo16);
 
             cupomDAO.persist(cupom);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("GerenciarJogos.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }

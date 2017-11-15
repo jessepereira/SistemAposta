@@ -7,6 +7,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
 import br.com.sport.util.JPAUtil;
+import org.hibernate.Session;
+import org.hibernate.boot.SessionFactoryBuilder;
+import org.hibernate.internal.SessionFactoryImpl;
 
 @SuppressWarnings("unchecked")
 public abstract class GenericDAO<E> {
@@ -18,6 +21,7 @@ public abstract class GenericDAO<E> {
 	public GenericDAO(Class<E> entity) {
 		entityManager = new JPAUtil().getEntity();
 		this.entity = entity;
+
 	}
 
 	/**
@@ -50,10 +54,9 @@ public abstract class GenericDAO<E> {
 	@Transactional
 	public void remove(E entity) {
 		entityManager.getTransaction().begin();
+		entity = entityManager.merge(entity);
 		entityManager.remove(entity);
 		entityManager.getTransaction().commit();
-		entityManager.close();
-
 	}
 
 	/**

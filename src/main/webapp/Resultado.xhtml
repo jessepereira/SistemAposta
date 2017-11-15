@@ -3,42 +3,48 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pe="http://primefaces.org/ui/extensions"
                 xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
     <ui:define name="content">
         <div align="center">
             <p:outputPanel id="painelGeral">
+                <p:messages id="messages" showDetail="true" closable="true"/>
                 <h:form>
                     <p:panel>
                         <p:outputLabel for="selectEixo" value="Selecione o Cupom:"/>
-                        <p:selectOneMenu id="selectEixo" value="#{pontuacaoApostaBean.cupom}" autoWidth="true"
-                                         converter="cupomConverter">
+                        <p:selectOneMenu id="selectEixo" value="#{pontuacaoApostaBean.cupomId}" autoWidth="true">
                             <f:selectItem itemLabel="Selecione" itemValue=""/>
                             <f:selectItems value="#{pontuacaoApostaBean.cupons}" var="cupom"
                                            itemLabel="#{cupom.nomeCupom}"
-                                           itemValue="#{cupom}"/>
-                            <p:ajax event="itemSelect" listener="#{pontuacaoApostaBean.onCupomSelect}"/>
+                                           itemValue="#{cupom.id}"/>
+                            <p:ajax event="itemSelect" listener="#{pontuacaoApostaBean.onCupomSelect}"
+                                    update="resultadoAposta"/>
                         </p:selectOneMenu>
                     </p:panel>
-                    <p:panel>
-                        <p:dataTable value="#{pontuacaoApostaBean.apostas}" var="aposta">
-                            <p:column headerText="Nome" style="text-align:center">
-                                <h:outputText value="#{aposta.apostador}"/>
-                            </p:column>
-                            <p:column headerText="Acertos">
-                                <h:outputText value="#{pontuacaoApostaBean.getAcertos(aposta.id)}"/>
-                            </p:column>
-                            <p:column headerText="Pontuação" sortBy="#{pontuacaoApostaBean.pontuacao}">
-                                <h:outputText value="#{pontuacaoApostaBean.calcularResultado(aposta.id)}"/>
-                            </p:column>
-
-                            <p:column headerText="Ações" style="text-align: center">
-                                <!--<p:commandButton oncomplete="PF('dateProvaDialog').show()" id="alterar"
-                                                 update="listProva:dateProva" title="Visualizar Bilhete">
-                                    <f:setPropertyActionListener value="#{aposta}" target="#{pontuacaoApostaBean.aposta}"/>
-                                </p:commandButton>-->
-                            </p:column>
-                        </p:dataTable>
-                    </p:panel>
+                    <p:fragment id="resultadoAposta">
+                        <p:panel>
+                            <p:dataTable id="resultTable" value="#{pontuacaoApostaBean.pontuacaoApostas}" var="aposta"
+                                         sortBy="#{aposta.pontuacao}">
+                                <f:facet name="header">
+                                    Resultados
+                                    <h:commandLink>
+                                        <p:graphicImage url="../resources/img/pdf.png" width="24"/>
+                                        <pe:exporter target="resultTable" type="pdf" subTable="false"
+                                                     fileName="resultado"/>
+                                    </h:commandLink>
+                                </f:facet>
+                                <p:column headerText="Nome" style="text-align:center">
+                                    <h:outputText value="#{aposta.nomeApostador}"/>
+                                </p:column>
+                                <p:column headerText="Acertos">
+                                    <h:outputText value="#{aposta.acertos}"/>
+                                </p:column>
+                                <p:column headerText="Pontuação">
+                                    <h:outputText value="#{aposta.pontuacao}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </p:fragment>
                 </h:form>
             </p:outputPanel>
         </div>

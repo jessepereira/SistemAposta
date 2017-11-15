@@ -43,30 +43,32 @@ public class ApostaBean implements Serializable {
 
     private boolean option = true;
     private String resultado;
+    private long cupomId;
     private int contador;
     private Map<String, String> item;
-
-    public ApostaBean() {
-    }
 
     @PostConstruct
     public void init() {
         cupomDAO = new CupomDAO();
         apostaDAO = new ApostaDAO();
+        escolhas = new ArrayList<>();
+        escolha = new Escolha();
 
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         aposta = (Aposta) session.getAttribute("currentAposta");
+        session.removeAttribute("currentAposta");
+
         if (aposta == null) {
             aposta = new Aposta();
-            escolha = new Escolha();
-            escolhas = new ArrayList<>();
             cupons = cupomDAO.getAllCuponsOnResultado();
-            if (cupons.size() == 1 && cupom == null) {
-                cupom = cupons.get(0);
+            if (cupons.size() != 0 && cupom == null) {
+                cupom = cupons.get(cupons.size() - 1);
             }
+            aposta.setEscolhas(null);
         } else {
             cupom = aposta.getCupom();
             option = false;
+            apostaDAO.remove(aposta);
         }
         item = new LinkedHashMap<String, String>();
         item.put("CASA", "C");
@@ -112,29 +114,19 @@ public class ApostaBean implements Serializable {
         }
     }
 
-    public void onCupomSelect() {
-        if (cupom != null) {
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("CriarAposta.xhtml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-
     public void salvarAposta() {
         try {
+            String nomeApostador = aposta.getApostador();
+            aposta = new Aposta();
+            aposta.setApostador(nomeApostador);
             aposta.setCupom(cupom);
             aposta.setEscolhas(escolhas);
             apostaDAO.persist(aposta);
-
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            aposta = new Aposta();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("CriarAposta.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Cupom getCupom() {
@@ -191,5 +183,13 @@ public class ApostaBean implements Serializable {
 
     public void setItem(Map<String, String> item) {
         this.item = item;
+    }
+
+    public long getCupomId() {
+        return cupomId;
+    }
+
+    public void setCupomId(long cupomId) {
+        this.cupomId = cupomId;
     }
 }
