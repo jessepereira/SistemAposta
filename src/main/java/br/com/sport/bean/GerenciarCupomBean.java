@@ -1,6 +1,8 @@
 package br.com.sport.bean;
 
+import br.com.sport.DAO.ApostaDAO;
 import br.com.sport.DAO.CupomDAO;
+import br.com.sport.model.Aposta;
 import br.com.sport.model.Cupom;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +25,7 @@ public class GerenciarCupomBean implements Serializable {
     private CupomDAO cupomDAO;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         cupom = new Cupom();
         cupomDAO = new CupomDAO();
         cupons = cupomDAO.findAll();
@@ -38,11 +40,17 @@ public class GerenciarCupomBean implements Serializable {
         }
     }
 
-    public void cancelarCupom() {
+    public void cancelarCupom(Cupom cupom) {
         try {
+            List<Aposta> apostas = new ApostaDAO().apostasByCupom(cupom.getId());
+            if (apostas != null && apostas.size() > 0) {
+                for (Aposta aposta : apostas) {
+                    new ApostaDAO().remove(aposta);
+                }
+            }
             cupomDAO.remove(cupom);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("OK", "Cupom Cancelado Com Sucesso"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("GerenciarAposta.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("GerenciarJogos.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }

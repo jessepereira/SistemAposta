@@ -52,10 +52,17 @@ public class JogoBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        cupomDAO = new CupomDAO();
+        timeDAO = new TimeDAO();
+        jogoDAO = new JogoDAO();
+        times = timeDAO.getAllTime();
+
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         cupom = (Cupom) session.getAttribute("currentCupom");
         if (cupom != null) {
             nomeCupom = cupom.getNomeCupom();
+            cupomDAO.remove(cupom);
+            cupom = null;
         }
         jogo1 = new Jogo();
         jogo2 = new Jogo();
@@ -73,17 +80,13 @@ public class JogoBean implements Serializable {
         jogo14 = new Jogo();
         jogo15 = new Jogo();
         jogo16 = new Jogo();
-        cupomDAO = new CupomDAO();
-        timeDAO = new TimeDAO();
-        jogoDAO = new JogoDAO();
-        times = timeDAO.getAllTime();
+
     }
 
     public void criarJogo() {
         try {
-            if (cupom == null) {
-                cupom = new Cupom();
-            }
+
+            cupom = new Cupom();
             cupom.setNomeCupom(nomeCupom);
             cupom.getJogos().add(jogo1);
             cupom.getJogos().add(jogo2);

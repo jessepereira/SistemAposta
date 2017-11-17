@@ -21,7 +21,7 @@ public class Resultado {
     @JoinColumn
     private Cupom cupom;
 
-    @OneToMany(targetEntity = Escolha.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Escolha.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Escolha> escolhas;
 
     public Long getId() {

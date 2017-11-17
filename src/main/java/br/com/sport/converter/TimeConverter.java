@@ -11,12 +11,15 @@ import javax.faces.convert.FacesConverter;
 import java.util.List;
 
 @FacesConverter("timeConverter")
+@ApplicationScoped
 public class TimeConverter implements Converter {
 
-    private List<Time> times = new TimeDAO().findAll();
-
+    private List<Time> times;
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if(times == null){
+            times = new TimeDAO().getAllTime();
+        }
         for (Time time : times) {
             if (time.getId().toString().equals(value)) {
                 return time;
@@ -27,13 +30,13 @@ public class TimeConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if(value.equals("")){
+        if (value.equals("")) {
             return null;
         }
         Time time = (Time) value;
-        if(time != null){
+        if (time != null) {
             return String.valueOf(time.getId());
-        }else{
+        } else {
             return null;
         }
 

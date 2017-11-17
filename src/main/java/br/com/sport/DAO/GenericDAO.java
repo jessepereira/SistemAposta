@@ -19,9 +19,7 @@ public abstract class GenericDAO<E> {
 	private Class<E> entity;
 
 	public GenericDAO(Class<E> entity) {
-		entityManager = new JPAUtil().getEntity();
 		this.entity = entity;
-
 	}
 
 	/**
@@ -32,17 +30,22 @@ public abstract class GenericDAO<E> {
 	 */
 	@Transactional
 	public void persist(E entity) {
+		entityManager = new JPAUtil().getEntity();
 		entityManager.getTransaction().begin();
 		entityManager.persist(entity);
+		entityManager.flush();
 		entityManager.getTransaction().commit();
+		entityManager.close();
 
 	}
 
 	@Transactional
 	public void merge(E entity) {
+		entityManager = new JPAUtil().getEntity();
 		entityManager.getTransaction().begin();
 		entityManager.merge(entity);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 
 	}
 
@@ -53,10 +56,12 @@ public abstract class GenericDAO<E> {
 	 */
 	@Transactional
 	public void remove(E entity) {
+		entityManager = new JPAUtil().getEntity();
 		entityManager.getTransaction().begin();
 		entity = entityManager.merge(entity);
 		entityManager.remove(entity);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	/**
@@ -68,7 +73,10 @@ public abstract class GenericDAO<E> {
 	 * @return
 	 */
 	public E findById(int id) {
-		return entityManager.find(entity, id);
+		entityManager = new JPAUtil().getEntity();
+		E e = entityManager.find(entity, id);
+		entityManager.close();
+		return e;
 	}
 
 	/**
@@ -78,9 +86,11 @@ public abstract class GenericDAO<E> {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<E> findAll() {
+		entityManager = new JPAUtil().getEntity();
 		CriteriaQuery criteria = entityManager.getCriteriaBuilder().createQuery();
 		criteria.select(criteria.from(entity));
-
-		return entityManager.createQuery(criteria).getResultList();
+		List<E> all = entityManager.createQuery(criteria).getResultList();
+		entityManager.close();
+		return all;
 	}
 }

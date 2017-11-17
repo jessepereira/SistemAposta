@@ -23,8 +23,7 @@
                     </p:panel>
                     <p:fragment id="resultadoAposta">
                         <p:panel>
-                            <p:dataTable id="resultTable" value="#{pontuacaoApostaBean.pontuacaoApostas}" var="aposta"
-                                         sortBy="#{aposta.pontuacao}">
+                            <p:dataTable id="resultTable" value="#{pontuacaoApostaBean.pontuacaoApostas}" var="aposta">
                                 <f:facet name="header">
                                     Resultados
                                     <h:commandLink>
@@ -39,7 +38,7 @@
                                 <p:column headerText="Acertos">
                                     <h:outputText value="#{aposta.acertos}"/>
                                 </p:column>
-                                <p:column headerText="Pontuação">
+                                <p:column headerText="Pontuação" sortBy="#{aposta.pontuacao}">
                                     <h:outputText value="#{aposta.pontuacao}"/>
                                 </p:column>
                             </p:dataTable>

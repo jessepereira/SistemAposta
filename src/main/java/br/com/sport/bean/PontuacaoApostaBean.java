@@ -50,6 +50,7 @@ public class PontuacaoApostaBean implements Serializable {
         resultadoDAO = new ResultadoDAO();
         escolhaDAO = new EscolhaDAO();
         aposta = new Aposta();
+        pontuacaoApostas = new ArrayList<>();
 
         if (cupom == null) {
             cupom = new Cupom();
@@ -61,50 +62,51 @@ public class PontuacaoApostaBean implements Serializable {
         } else {
             apostas = apostaDAO.apostasByCupom(cupom.getId());
         }
-        criarListagemPontuacao();
+        resultado = resultadoDAO.getResultadoByCupom(cupom.getId());
+        if (resultado != null) {
+            criarListagemPontuacao();
+        }
     }
 
     public void onCupomSelect() {
         if (cupom != null) {
             apostas = apostaDAO.apostasByCupom(cupomId);
+            resultado = resultadoDAO.getResultadoByCupom((long) cupomId);
             criarListagemPontuacao();
         }
     }
 
     private int calcularResultado(int apostaID) {
-        pontuacao = 0;
-        resultado = resultadoDAO.getResultadoByCupom(cupom.getId());
+        int pontuacao = 0;
         List<Escolha> escolhas = escolhaDAO.getEscolhasByAposta(apostaID);
         for (Escolha escolha : escolhas) {
             for (int i = 0; i < resultado.getEscolhas().size(); i++) {
                 if (escolha.getJogo().getId() == resultado.getEscolhas().get(i).getJogo().getId()) {
                     if (escolha.getResposta().equals(resultado.getEscolhas().get(i).getResposta())) {
                         pontuacao = pontuacao + 3;
-                        resultado.getEscolhas().remove(i);
+                        break;
                     } else if (resultado.getEscolhas().get(i).getResposta().equals("E")) {
                         pontuacao = pontuacao + 1;
                     }
                 }
             }
         }
-        resultado = null;
         return pontuacao;
     }
 
     private int calcularAcerto(int apostaID) {
-        acerto = 0;
-        resultado = resultadoDAO.getResultadoByCupom(cupom.getId());
+        int acerto = 0;
         List<Escolha> escolhas = escolhaDAO.getEscolhasByAposta(apostaID);
         for (Escolha escolha : escolhas) {
             for (int i = 0; i < resultado.getEscolhas().size(); i++) {
                 if (escolha.getJogo().getId() == resultado.getEscolhas().get(i).getJogo().getId()) {
                     if (escolha.getResposta().equals(resultado.getEscolhas().get(i).getResposta())) {
                         acerto++;
+                        break;
                     }
                 }
             }
         }
-        resultado = null;
         return acerto;
     }
 

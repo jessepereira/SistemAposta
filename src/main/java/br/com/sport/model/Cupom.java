@@ -20,7 +20,7 @@ public class Cupom {
     @Column
     private String nomeCupom;
 
-    @OneToMany(targetEntity = Jogo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Jogo.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jogo> jogos = new ArrayList<>();
 
     @Column

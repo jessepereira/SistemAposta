@@ -10,10 +10,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.io.Serializable;
 
 @ManagedBean
 @ViewScoped
-public class LoginBean {
+public class LoginBean implements Serializable {
+
+    private static final long serialVersionUID = -998614651887643681L;
 
     private Usuario usuario;
     private UsuarioDAO usuarioDAO;

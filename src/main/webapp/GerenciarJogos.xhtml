@@ -25,10 +25,9 @@
                             <p:commandButton id="alterar" actionListener="#{gerenciarCupomBean.editCupom(cupom)}"
                                              icon="ui-icon-pencil" title="Alterar Aposta">
                             </p:commandButton>
-                            <p:commandButton actionListener="#{gerenciarCupomBean.cancelarCupom}" id="cancelar"
+                            <p:commandButton actionListener="#{gerenciarCupomBean.cancelarCupom(cupom)}" id="cancelar"
                                              icon="ui-icon-closethick"
                                              title="Cancelar Prova">
-                                <f:setPropertyActionListener value="#{cupom}" target="#{gerenciarCupomBean.cupom}"/>
                                 <p:confirm header="Confirmação" message="Deseja Cancelar o Cupom?"
                                            icon="ui-icon-alert"/>
                             </p:commandButton>
