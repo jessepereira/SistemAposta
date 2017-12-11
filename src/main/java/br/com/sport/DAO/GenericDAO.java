@@ -2,6 +2,7 @@ package br.com.sport.DAO;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
@@ -14,10 +15,11 @@ import org.hibernate.internal.SessionFactoryImpl;
 @SuppressWarnings("unchecked")
 public abstract class GenericDAO<E> {
 
-	protected EntityManager entityManager;
+
+	@Inject private EntityManager manager;
 
 	private Class<E> entity;
-
+    @Inject
 	public GenericDAO(Class<E> entity) {
 		this.entity = entity;
 	}
@@ -30,22 +32,22 @@ public abstract class GenericDAO<E> {
 	 */
 	@Transactional
 	public void persist(E entity) {
-		entityManager = new JPAUtil().getEntity();
-		entityManager.getTransaction().begin();
-		entityManager.persist(entity);
-		entityManager.flush();
-		entityManager.getTransaction().commit();
-		entityManager.close();
+
+		manager.getTransaction().begin();
+		manager.persist(entity);
+		manager.flush();
+		manager.getTransaction().commit();
+
 
 	}
 
 	@Transactional
 	public void merge(E entity) {
-		entityManager = new JPAUtil().getEntity();
-		entityManager.getTransaction().begin();
-		entityManager.merge(entity);
-		entityManager.getTransaction().commit();
-		entityManager.close();
+
+		manager.getTransaction().begin();
+		manager.merge(entity);
+		manager.getTransaction().commit();
+
 
 	}
 
@@ -56,12 +58,12 @@ public abstract class GenericDAO<E> {
 	 */
 	@Transactional
 	public void remove(E entity) {
-		entityManager = new JPAUtil().getEntity();
-		entityManager.getTransaction().begin();
-		entity = entityManager.merge(entity);
-		entityManager.remove(entity);
-		entityManager.getTransaction().commit();
-		entityManager.close();
+
+		manager.getTransaction().begin();
+		entity = manager.merge(entity);
+		manager.remove(entity);
+		manager.getTransaction().commit();
+
 	}
 
 	/**
@@ -73,9 +75,9 @@ public abstract class GenericDAO<E> {
 	 * @return
 	 */
 	public E findById(int id) {
-		entityManager = new JPAUtil().getEntity();
-		E e = entityManager.find(entity, id);
-		entityManager.close();
+
+		E e = manager.find(entity, id);
+
 		return e;
 	}
 
@@ -86,11 +88,11 @@ public abstract class GenericDAO<E> {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<E> findAll() {
-		entityManager = new JPAUtil().getEntity();
-		CriteriaQuery criteria = entityManager.getCriteriaBuilder().createQuery();
+
+		CriteriaQuery criteria = manager.getCriteriaBuilder().createQuery();
 		criteria.select(criteria.from(entity));
-		List<E> all = entityManager.createQuery(criteria).getResultList();
-		entityManager.close();
+		List<E> all = manager.createQuery(criteria).getResultList();
+		manager.close();
 		return all;
 	}
 }
